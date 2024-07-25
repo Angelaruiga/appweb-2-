@@ -34,17 +34,17 @@ G = nx.DiGraph()
 for index, row in filtered_data.iterrows():
     G.add_edge(row['Grupo1'], row['Grupo2'], weight=row['Suma de Interacciones'])
 
-pos = nx.spring_layout(G, k=1.0)
+pos = nx.spring_layout(G, k=0.5)
 labels = {node: node for node in G.nodes()}
 
 # Calcular el tamaño de los nodos basado en el total de interacciones
-node_size = [node_interactions.get(node, 1) * 200 for node in G.nodes()]  # Aumentado el tamaño de los nodos
+node_size = [node_interactions.get(node, 1) * 500 for node in G.nodes()]  # Aumentado el tamaño de los nodos
 
 # Configurar el Streamlit
 st.title("Publicaciones 2023 en colaboración")
 
 # Crear gráfico con matplotlib y mostrarlo en Streamlit
-fig, ax = plt.subplots(figsize=(35, 50))  # Aumentado el tamaño del gráfico
+fig, ax = plt.subplots(figsize=(35, 20))  # Aumentado el tamaño del gráfico
 nx.draw_networkx_nodes(G, pos, node_size=node_size, node_color='orange', alpha=0.9, ax=ax)
 nx.draw_networkx_edges(G, pos, width=0.5, alpha=0.5, edge_color='grey', ax=ax, arrows=True)
 nx.draw_networkx_labels(G, pos, labels=labels, font_size=15, font_family="sans-serif", ax=ax)  # Aumentada la fuente de las etiquetas
